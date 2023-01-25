@@ -16,13 +16,31 @@ public class Wombat extends Herbivore {
         setImage("wombat.png");
     }
 
-    public void act() {
+    private int count = -1;
+
+    public void act(){
+        // If The Wombat Finds A Leaf
         if (this.foundLeaf()) {
             this.eatLeaf();
+        // If The Wombat Does Not Find A Leaf But Hasn't Hit a Wall
         } else if (this.canMove()) {
             this.move();
+        // If The Wombat Hits a Wall
         } else {
-            this.turnLeft();
+            // Increments count whenever a wall is hit
+            count += 1;
+            // Even Turns
+            if (count % 2 == 0) {
+                this.turnLeft();
+                this.move();
+                this.turnLeft();
+            }
+            // Odd Turns
+            else {
+                this.turnRight();
+                this.move();
+                this.turnRight();
+            }
         }
     }
 
@@ -35,6 +53,18 @@ public class Wombat extends Herbivore {
             this.setDirection(WEST);
         } else {
             this.setDirection(EAST);
+        }
+    }
+
+    public void turnRight() {
+        if (this.getDirection() == EAST) {
+            this.setDirection(SOUTH);
+        } else if (this.getDirection() == WEST) {
+            this.setDirection(NORTH);
+        } else if (this.getDirection() == NORTH) {
+            this.setDirection(EAST);
+        } else {
+            this.setDirection(WEST);
         }
     }
 }
