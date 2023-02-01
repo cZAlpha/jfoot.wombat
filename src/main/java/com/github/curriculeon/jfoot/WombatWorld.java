@@ -1,5 +1,6 @@
 package com.github.curriculeon.jfoot;
 
+import com.github.git_leon.RandomUtils;
 import greenfoot.*;  // imports Actor, World, Greenfoot, GreenfootImage
 
 /**
@@ -17,6 +18,13 @@ public class WombatWorld extends World {
         super(10, 10, 60);
         setBackground("cell.jpg");
         setPaintOrder(Wombat.class, Leaf.class);  // draw wombat on top of leaf
+    }
+
+    public void act(){
+        // 1% chance of spawning leaves on the map
+        if (RandomUtils.createBoolean(0.5F)){
+            randomLeaves(50);
+        }
     }
 
     /**

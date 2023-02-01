@@ -27,19 +27,30 @@ public class Wombat extends Herbivore {
             this.move();
         // If The Wombat Hits a Wall
         } else {
-            // Increments count whenever a wall is hit
-            count += 1;
-            // Even Turns
-            if (count % 2 == 0) {
+            // If Facing East, Go To Next Line
+            if ( this.getDirection() == EAST ) {
                 this.turnLeft();
                 this.move();
                 this.turnLeft();
             }
-            // Odd Turns
-            else {
+            // If Facing West, Go To Next Line
+            else if ( (this.getDirection() == WEST) ) {
                 this.turnRight();
                 this.move();
                 this.turnRight();
+            }
+            // If At The Top Left, Return To Start
+            else if ( (this.getX() == 0) && (this.getY() == 0) ){
+                System.out.println("RETURNING TO START, COORDS:(0,9)");
+                this.turnLeft();
+            }
+            // If At The Bottom Left (Starting Location) and Facing South, Turn Left
+            else if ( (this.getX() == 0) && (this.getY() == 9) && (this.getDirection() == SOUTH) ){
+                this.turnLeft();
+            }
+            // Handles Cracks In My Logic, Has Not Gone Off Yet...
+            else {
+                System.out.println("CASE NOT HANDLED! CHECK LOGIC BETWEEN LINES 29-46");
             }
         }
     }
